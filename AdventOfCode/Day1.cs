@@ -13,9 +13,11 @@ namespace AdventOfCode
             var sum = 0;
             for (var i = 0; i < numbers.Length; i++)
             {
-                int thisNumber = numbers[i];
+                var thisNumber = numbers[i];
 
                 int nextNumber;
+
+                // The next number after the last one is the first one.
                 nextNumber = i < numbers.Length - 1 ? numbers[i + 1] : numbers[0];
 
                 if (thisNumber == nextNumber)
@@ -29,7 +31,32 @@ namespace AdventOfCode
 
         public static string RunPart2()
         {
-            return null;
+            var numbers = ReadInput();
+
+            var jumpAhead = numbers.Length / 2;
+
+            var sum = 0;
+            for (var i = 0; i < numbers.Length; i++)
+            {
+                var thisNumber = numbers[i];
+
+                var indexToCheck = i + jumpAhead;
+     
+                // Wrap the index for this circular list.
+                if (indexToCheck > numbers.Length - 1)
+                {
+                    indexToCheck = indexToCheck - numbers.Length;
+                }
+
+                var nextNumber = numbers[indexToCheck];
+
+                if (thisNumber == nextNumber)
+                {
+                    sum = sum + thisNumber;
+                }
+            }
+
+            return sum.ToString();
         }
 
         private static int[] ReadInput()
