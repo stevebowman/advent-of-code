@@ -1,5 +1,4 @@
 ﻿using System;
-using AdventOfCode;
 
 namespace Runner
 {
@@ -8,13 +7,38 @@ namespace Runner
         // ReSharper disable once UnusedParameter.Local
         static void Main(string[] args)
         {
-            var result1 = Day5.RunPart1();
-            Console.WriteLine("Day 5 Part 1: " + result1);
+            try
+            {
+                bool quit = false;
 
-            var result2 = Day5.RunPart2();
-            Console.WriteLine("Day 5 part 2: " + result2);
+                while (!quit)
+                {
+                    Console.WriteLine("Enter day number or Q to quit:");
+                    var dayNumber = Console.ReadLine();
 
-            Console.ReadLine();
+                    if (dayNumber.ToUpper() == "Q")
+                    {
+                        quit = true;
+                    }
+                    else
+                    {
+                        var type = Type.GetType($"AdventOfCode.Day{dayNumber},AdventOfCode", true);
+
+                        var result1 = type.GetMethod("RunPart1").Invoke(null, null);
+                        Console.WriteLine($"Day {dayNumber} Part 1: " + result1);
+
+                        var result2 = type.GetMethod("RunPart2").Invoke(null, null);
+                        Console.WriteLine($"Day {dayNumber} Part 2: " + result2);
+
+                        Console.WriteLine();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Exception: " + ex.Message);
+                Console.ReadLine();
+            }
         }
     }
 }
