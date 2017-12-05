@@ -10,28 +10,18 @@ namespace AdventOfCode
         {
             var numbers = ReadInput();
 
-            var highestArrayIndex = numbers.Length - 1;
-            var location = 0;
-            var stepCount = 0;
-
-            while (location <= highestArrayIndex)
-            {
-                stepCount++;
-
-                var jump = numbers[location];
-
-                numbers[location]++;
-
-                location = location + jump;
-            }
-
-            return stepCount.ToString();
+            return GetStepCount(numbers, false).ToString();
         }
 
         public static string RunPart2()
         {
             var numbers = ReadInput();
 
+            return GetStepCount(numbers, true).ToString();
+        }
+
+        private static int GetStepCount(int[] numbers, bool enableWeirdBehaviour)
+        {
             var highestArrayIndex = numbers.Length - 1;
             var location = 0;
             var stepCount = 0;
@@ -42,19 +32,18 @@ namespace AdventOfCode
 
                 var jump = numbers[location];
 
-                if (jump < 3)
+                if (enableWeirdBehaviour && jump >= 3)
                 {
-                    numbers[location]++;
+                    numbers[location]--;
                 }
                 else
                 {
-                    numbers[location]--;
+                    numbers[location]++;
                 }
 
                 location = location + jump;
             }
-
-            return stepCount.ToString();
+            return stepCount;
         }
 
         private static int[] ReadInput()

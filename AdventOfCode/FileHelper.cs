@@ -10,7 +10,7 @@ namespace AdventOfCode
             get
             {
                 var assembley = Assembly.GetExecutingAssembly();
-                return Path.Combine(System.IO.Path.GetDirectoryName(assembley.Location), "Input");
+                return Path.Combine(Path.GetDirectoryName(assembley.Location), "Input");
             }
         }
     }
