@@ -25,10 +25,10 @@ namespace Runner
                         var type = Type.GetType($"AdventOfCode.Day{dayNumber},AdventOfCode", true);
 
                         var result1 = type.GetMethod("RunPart1").Invoke(null, null);
-                        Console.WriteLine($"Day {dayNumber} Part 1: " + result1);
+                        Console.WriteLine($"Day {dayNumber} Part 1: {result1}");
 
                         var result2 = type.GetMethod("RunPart2").Invoke(null, null);
-                        Console.WriteLine($"Day {dayNumber} Part 2: " + result2);
+                        Console.WriteLine($"Day {dayNumber} Part 2: {result2}");
 
                         Console.WriteLine();
                     }
