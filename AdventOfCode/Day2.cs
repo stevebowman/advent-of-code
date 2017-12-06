@@ -11,7 +11,9 @@ namespace AdventOfCode
         {
             var rows = ReadInput();
 
-            return null;
+            var checkSum = rows.Aggregate(0, (current, row) => current + (row.Max() - row.Min()));
+
+            return checkSum.ToString();
         }
 
         public static string RunPart2()
