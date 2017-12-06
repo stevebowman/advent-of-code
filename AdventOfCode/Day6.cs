@@ -46,7 +46,7 @@ namespace AdventOfCode
             return stepCount;
         }
 
-        private static bool HasBeenSeenBefore(int[] state, IList<int[]> previousStates)
+        private static bool HasBeenSeenBefore(int[] state, IEnumerable<int[]> previousStates)
         {
             return previousStates.Any(prevState => prevState.SequenceEqual(state));
         }
@@ -57,11 +57,13 @@ namespace AdventOfCode
             var maxValue = numbers.Max();
             var maxIndex = Array.IndexOf(numbers, maxValue);
 
+            // Remove the blocks to be redistributed.
             numbers[maxIndex] = 0;
 
             var index = maxIndex + 1;
             index = WrapIndex(numbers.Length, index);
 
+            // Redistribute blocks
             while (maxValue > 0)
             {
                 numbers[index]++;
