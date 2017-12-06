@@ -9,26 +9,41 @@ namespace AdventOfCode
     {
         public static string RunPart1()
         {
-            var previousStates = new List<int[]>();
-
             var values = ReadInput();
 
-            var stepCount = 0;
-            while (!HasBeenSeenBefore(values, previousStates))
-            {
-                stepCount++;
-
-                previousStates.Add((int[])values.Clone());
-
-                Redistribute(values);
-            }
+            var stepCount = FindStepsToPreviouslySeenValue(values, out _);
 
             return stepCount.ToString();
         }
 
         public static string RunPart2()
         {
-            return null;
+            var values = ReadInput();
+
+            FindStepsToPreviouslySeenValue(values, out var stopState);
+
+            var stepsToSeeItAgain = FindStepsToPreviouslySeenValue(stopState, out _);
+
+            return stepsToSeeItAgain.ToString();
+        }
+
+        private static int FindStepsToPreviouslySeenValue(int[] values, out int[] stopState)
+        {
+            var previousStates = new List<int[]>();
+
+            var stepCount = 0;
+            while (!HasBeenSeenBefore(values, previousStates))
+            {
+                stepCount++;
+
+                previousStates.Add((int[]) values.Clone());
+
+                Redistribute(values);
+            }
+
+            stopState = (int[])values.Clone();
+
+            return stepCount;
         }
 
         private static bool HasBeenSeenBefore(int[] state, IList<int[]> previousStates)
