@@ -26,15 +26,15 @@ namespace AdventOfCode
             // We need to reduce that by the distance from the nearest corner
             // if you are not a corner, as that moves you closer to the centre.
             var nearestCorner = corners[0];
-            var distanceToNearestCorner = Math.Abs(nearestCorner - Input);
             for (var i = 1; i <= 3; i++)
             {
                 if (Math.Abs(corners[i] - Input) < Math.Abs(nearestCorner - Input))
                 {
                     nearestCorner = corners[i];
-                    distanceToNearestCorner = Math.Abs(nearestCorner - Input);
                 }
             }
+
+            var distanceToNearestCorner = Math.Abs(nearestCorner - Input);
 
             var distanceToCentre = squareSize - 1 - distanceToNearestCorner;
 
